@@ -1,13 +1,15 @@
-export default function postTicket() {
+export default function editTicket() {
   const modal = document.querySelector('.modal');
 
   modal.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const body = Array.from(modal.elements)
+    let body = Array.from(modal.elements)
       .filter(({ name }) => name)
       .map(({ name, value }) => `${name}=${encodeURIComponent(value)}`)
       .join('&');
+
+    body = `${body}&id=${encodeURIComponent(modal.dataset.number)}`;
 
     const xhr = new XMLHttpRequest();
 
